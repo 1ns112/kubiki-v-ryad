@@ -1,6 +1,7 @@
 databases:
   - name: kubiki-db
     plan: free
+    region: frankfurt
     databaseName: kubiki
     user: kubiki
 
