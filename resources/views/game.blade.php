@@ -11,6 +11,9 @@
 <main class="game">
     <nav class="nav">
         <a href="{{ route('records') }}">Рекорды</a>
+        @if (auth()->user()?->isAdmin())
+            <a href="{{ route('admin.index') }}">Админка</a>
+        @endif
         <span class="spacer"></span>
         @auth
             <span class="who">{{ auth()->user()->name }}</span>

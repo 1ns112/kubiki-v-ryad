@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,9 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::post('/scores', [ScoreController::class, 'store'])->middleware('auth')->name('scores.store');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::patch('/users/{user}/role', [AdminController::class, 'toggleRole'])->name('users.role');
+    Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+});
